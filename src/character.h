@@ -55,7 +55,11 @@ struct character
 void character_load(character& c, const char* filename)
 {
     FILE* f = fopen(filename, "rb");
-    assert(f != NULL);
+    if (f == NULL)
+    {
+        printf("File not found: %s\n", filename);
+        assert(f != NULL);
+    }
     
     array1d_read(c.positions, f);
     array1d_read(c.normals, f);
